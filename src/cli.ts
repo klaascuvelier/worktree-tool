@@ -17,11 +17,11 @@ const program = new Command();
 program
   .name('kwt')
   .description('k11r Worktree Tool - A TypeScript wrapper around git worktrees')
-  .version(packageJson.version);
+  .version(packageJson.version, '-v, --version', 'display version number');
 
 // Global options
 program
-  .option('-v, --verbose', 'enable verbose logging')
+  .option('-d, --verbose', 'enable verbose logging')
   .option('-c, --config <path>', 'path to config file')
   .option('--dry-run', 'show what would be done without executing');
 

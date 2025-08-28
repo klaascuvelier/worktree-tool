@@ -317,8 +317,9 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ### Debug Mode
 
-Use the `--verbose` flag for detailed logging:
+Use the `--verbose` (or `-d`) flag for detailed logging:
 
 ```bash
 kwt --verbose new my-feature
+kwt -d new my-feature
 ```
