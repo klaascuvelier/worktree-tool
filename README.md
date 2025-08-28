@@ -1,12 +1,13 @@
 # KWT - k11r Worktree Tool
 
-A modern TypeScript wrapper around git worktrees with GitLab integration and intelligent configuration management.
+A modern TypeScript wrapper around git worktrees with GitLab and GitHub integration and intelligent configuration management.
 
 ## Features
 
 - 🚀 **Easy worktree management** - Create, remove, and list git worktrees with simple commands
 - 🔧 **Flexible prefix configuration** - Support for none, manual, or auto-detected prefixes
 - 🦊 **GitLab integration** - Create worktrees directly from merge requests using `glab`
+- 🐙 **GitHub integration** - Create worktrees directly from pull requests using `gh`
 - ⚙️ **Post-creation commands** - Run custom commands after worktree creation
 - 📁 **Smart configuration** - Local and global configuration with intelligent merging
 - 🎯 **TypeScript first** - Fully typed with strict TypeScript configuration
@@ -50,13 +51,19 @@ npm link  # For global access during development
    kwt mr 123
    ```
 
-4. **List all worktrees**:
+4. **Create worktree from GitHub PR**:
+
+   ```bash
+   kwt pr 123
+   ```
+
+5. **List all worktrees**:
 
    ```bash
    kwt list
    ```
 
-5. **Remove a worktree**:
+6. **Remove a worktree**:
    ```bash
    kwt rm feature-branch
    ```
@@ -101,6 +108,27 @@ kwt mr 456 --checkout
 
 - `glab` CLI tool must be installed and configured
 - Must be run in a GitLab project repository
+
+### `kwt pr <number>`
+
+Create a worktree from a GitHub pull request.
+
+**Options:**
+
+- `--checkout` - Checkout existing worktree if it exists
+- `--dry-run` - Show what would be done without executing
+
+**Examples:**
+
+```bash
+kwt pr 123
+kwt pr 456 --checkout
+```
+
+**Requirements:**
+
+- `gh` CLI tool must be installed and configured
+- Must be run in a GitHub project repository
 
 ### `kwt rm <name>`
 
@@ -245,6 +273,21 @@ The tool will:
 
 - Verify the MR exists
 - Fetch the source branch
+- Create a worktree with an appropriate name
+- Run post-creation commands
+
+## GitHub Integration
+
+KWT integrates with GitHub through the `gh` CLI tool:
+
+1. **Install gh**: Follow [gh installation guide](https://cli.github.com/)
+2. **Authenticate**: `gh auth login`
+3. **Use PR command**: `kwt pr <pull-request-number>`
+
+The tool will:
+
+- Verify the PR exists
+- Fetch the head branch
 - Create a worktree with an appropriate name
 - Run post-creation commands
 

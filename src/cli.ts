@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import { NewCommand, MRCommand, RemoveCommand } from './commands/index.js';
+import { NewCommand, MRCommand, PRCommand, RemoveCommand } from './commands/index.js';
 import { ConfigManager } from './config/index.js';
 import { logger } from './utils/index.js';
 import { readFileSync } from 'fs';
@@ -53,6 +53,23 @@ program
     try {
       const globalOptions = program.opts();
       const command = new MRCommand();
+      await command.execute(number, { ...globalOptions, ...options });
+    } catch (error) {
+      logger.error(error instanceof Error ? error.message : 'Unknown error');
+      process.exit(1);
+    }
+  });
+
+// PR command
+program
+  .command('pr')
+  .description('create a worktree from a GitHub pull request')
+  .argument('<number>', 'pull request number')
+  .option('--checkout', 'checkout existing worktree if it exists')
+  .action(async (number: string, options) => {
+    try {
+      const globalOptions = program.opts();
+      const command = new PRCommand();
       await command.execute(number, { ...globalOptions, ...options });
     } catch (error) {
       logger.error(error instanceof Error ? error.message : 'Unknown error');

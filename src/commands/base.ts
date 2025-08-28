@@ -1,5 +1,6 @@
 import { ConfigManager } from '../config/index.js';
 import { GitRemoteManager, GitWorktreeManager, GitLabManager } from '../git/index.js';
+import { GitHubManager } from '../git/github.js';
 import type { Config, CLIOptions, PostCommand } from '../types/index.js';
 import { logger, ExecUtils } from '../utils/index.js';
 
@@ -8,6 +9,7 @@ export abstract class BaseCommand {
   protected gitRemoteManager: GitRemoteManager;
   protected gitWorktreeManager: GitWorktreeManager;
   protected gitLabManager: GitLabManager;
+  protected gitHubManager: GitHubManager;
   protected config: Config | null = null;
 
   constructor(protected readonly cwd: string = process.cwd()) {
@@ -15,6 +17,7 @@ export abstract class BaseCommand {
     this.gitRemoteManager = new GitRemoteManager(cwd);
     this.gitWorktreeManager = new GitWorktreeManager(cwd);
     this.gitLabManager = new GitLabManager(cwd);
+    this.gitHubManager = new GitHubManager(cwd);
   }
 
   /**

@@ -42,6 +42,15 @@ export interface GitLabMR {
   web_url: string;
 }
 
+export interface GitHubPR {
+  number: number;
+  title: string;
+  headRefName: string;
+  baseRefName: string;
+  state: string;
+  url: string;
+}
+
 // CLI related types
 export interface CLIOptions {
   config?: string;
@@ -55,6 +64,10 @@ export interface NewCommandOptions extends CLIOptions {
 }
 
 export interface MRCommandOptions extends CLIOptions {
+  checkout?: boolean;
+}
+
+export interface PRCommandOptions extends CLIOptions {
   checkout?: boolean;
 }
 
@@ -92,5 +105,11 @@ export class GitError extends KWTError {
 export class GitLabError extends KWTError {
   constructor(message: string, cause?: Error) {
     super(message, 'GITLAB_ERROR', cause);
+  }
+}
+
+export class GitHubError extends KWTError {
+  constructor(message: string, cause?: Error) {
+    super(message, 'GITHUB_ERROR', cause);
   }
 }
