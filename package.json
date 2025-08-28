@@ -1,6 +1,6 @@
 {
   "name": "@k11r/kwt",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "k11r Worktree Tool - A TypeScript wrapper around git worktrees",
   "main": "dist/index.js",
   "type": "module",
