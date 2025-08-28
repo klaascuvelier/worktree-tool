@@ -12,4 +12,7 @@ export default defineConfig({
   esbuildOptions(options) {
     options.conditions = ['node'];
   },
+  banner: {
+    js: '#!/usr/bin/env node',
+  },
 });
